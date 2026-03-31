@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>iReanimación · Capacitación en Emergencias Médicas</title>
+<meta content="Capacitación profesional en emergencias médicas con enfoque hospitalario, ético y científico." name="description"/>
+<meta content="#0B1A2A" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Montserrat:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --white:#ffffff;
+  --soft:#F4F7FB;
+  --soft2:#EEF3F9;
+  --ink:#0E1A2B;
+  --muted:#5E6B7A;
+
+  --red:#C62828;
+  --orange:#EF6C00;
+  --blue:#1565C0;
+  --green:#2E7D32;
+
+  --navy:#0B1A2A;
+  --navy2:#10243A;
+  --line:#E6EBF2;
+
+  --radius:20px;
+  --shadow:0 16px 40px rgba(15,25,40,.08);
+  --shadow2:0 12px 28px rgba(15,25,40,.07);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial;
+  color:var(--ink);
+  background:var(--white);
+  line-height:1.65;
+  text-align:center; /* <-- CENTRADO GLOBAL */
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:Montserrat;margin:0 0 10px}
+p{margin:0 0 12px}
+.small{font-size:13px}
+.muted{color:var(--muted)}
+.container{max-width:1200px;margin:auto;padding:0 24px}
+.section{padding:104px 0; position:relative}
+.section.soft{background:var(--soft)}
+
+/* Reveal animations (serias) */
+.reveal{opacity:1; transform:none; transition:opacity .75s ease, transform .75s ease}
+.reveal.in{opacity:1; transform:translateY(0)}
+.reveal.pop{transform:translateY(18px) scale(.985)}
+.reveal.in.pop{transform:translateY(0) scale(1)}
+
+/* Header */
+header{
+  position:fixed; top:0; left:0; right:0;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  z-index:50;
+}
+.header-inner{
+  height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+.brand{display:flex; align-items:center; gap:12px; min-width:160px}
+.brand img{height:44px; width:auto}
+/* sin texto "Reanimación" en navbar: solo logo */
+nav{display:flex; align-items:center; justify-content:center; flex:1; gap:18px}
+nav a{
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink);
+  opacity:.86;
+  position:relative;
+  padding:10px 10px;
+  border-radius:999px;
+}
+nav a:hover{opacity:1; background:rgba(14,26,43,.04)}
+nav a.active::after{
+  content:"";
+  position:absolute; left:14px; right:14px; bottom:4px;
+  height:2px; border-radius:999px;
+  background:rgba(21,101,192,.55);
+}
+.header-actions{display:flex; gap:10px; align-items:center}
+
+/* Buttons (serios) */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:12px 18px;
+  border-radius:999px;
+  border:1px solid #D8E0EA;
+  background:var(--white);
+  color:var(--ink);
+  font-weight:800;
+  cursor:pointer;
+  transition:transform .15s ease, background .2s ease, border-color .2s ease;
+}
+.btn:hover{transform:translateY(-1px); background:#FBFDFF}
+.btn.primary{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:white;
+}
+.btn.primary:hover{background:#0F56A6}
+
+/* Hero (sin logo en la imagen; se usa hero.jpg real) */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding-top:78px;
+  background:
+    radial-gradient(900px 420px at 18% 22%, rgba(21,101,192,.12), transparent 60%),
+    radial-gradient(700px 320px at 74% 20%, rgba(46,125,50,.10), transparent 60%),
+    linear-gradient(90deg, rgba(255,255,255,.985), rgba(255,255,255,.76)),
+    url("./assets/hero.jpg") center/cover no-repeat;
+}
+.hero h1{
+  font-size:clamp(38px, 5vw, 60px);
+  letter-spacing:-.02em;
+  margin:0 auto 12px;
+  max-width:26ch;
+}
+.hero p{max-width:72ch; margin:0 auto; font-size:18px; color:var(--muted)}
+.hero-cta{display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:22px}
+
+.hero-stats{
+  margin:28px auto 0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  max-width:920px;
+}
+.stat{
+  background:rgba(255,255,255,.88);
+  border-radius:16px;
+  box-shadow:var(--shadow2);
+  padding:16px 18px;
+  transition:transform .2s ease;
+}
+.stat:hover{transform:translateY(-2px)}
+.stat strong{display:block; font-weight:900}
+.stat span{display:block; color:var(--muted); font-size:13px}
+
+/* Cards (sin borde visible) */
+.card{
+  background:white;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:32px;
+  text-align:center;
+}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:stretch}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+
+/* Pillars */
+.pillar{position:relative; overflow:hidden}
+.pillar::before{
+  content:"";
+  position:absolute; inset:auto -20% -45% -20%;
+  height:140px;
+  background:radial-gradient(closest-side, rgba(21,101,192,.12), transparent 72%);
+  pointer-events:none;
+}
+.pillar .k{
+  display:inline-block;
+  font-weight:900;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* Pillars glow */
+.pillar{
+  border:1px solid rgba(16,36,58,.06);
+  box-shadow:var(--shadow2);
+  transition:transform .22s ease, box-shadow .22s ease;
+}
+.pillar::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:calc(var(--radius) + 2px);
+  background: radial-gradient(600px 180px at 50% 0%, rgba(21,101,192,.18), transparent 60%),
+              radial-gradient(520px 160px at 20% 100%, rgba(46,125,50,.14), transparent 55%);
+  opacity:0;
+  transition:opacity .22s ease;
+  pointer-events:none;
+}
+.pillar:hover{
+  transform:translateY(-3px);
+  box-shadow:0 22px 55px rgba(15,25,40,.12);
+}
+.pillar:hover::after{opacity:1;}
+
+/* Gallery */
+.gallery-grid{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:18px;
+  max-width:980px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.ph{
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow2);
+  position:relative;
+  background:var(--soft2);
+  transition:transform .25s ease, box-shadow .25s ease;
+  aspect-ratio: 4 / 3;
+}
+.ph:hover{transform:translateY(-3px); box-shadow:0 22px 46px rgba(15,25,40,.12)}
+.ph img{width:100%; height:100%; object-fit:cover}
+.ph::after{
+  content:"";
+  position:absolute; inset:auto 0 0 0;
+  height:58%;
+  background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.22));
+}
+.ph span{
+  position:absolute; left:14px; right:14px; bottom:12px;
+  color:#fff; font-weight:900; font-size:13px;
+  text-shadow:0 10px 24px rgba(0,0,0,.25);
+  text-align:left;
+}
+@media (max-width: 760px){
+  .gallery-grid{grid-template-columns:1fr; gap:14px;}
+  .ph{aspect-ratio: 16 / 10;}
+}
+
+
+/* Courses (accordion) */
+.months{display:grid;gap:18px; max-width:980px; margin:22px auto 0}
+.month{
+  background:white;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  text-align:left; /* internos pueden ser izquierda, pero títulos centrados arriba */
+}
+.month summary{
+  padding:22px 24px;
+  font-size:18px;
+  font-weight:900;
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:linear-gradient(90deg,
+    rgba(198,40,40,.05),
+    rgba(239,108,0,.05),
+    rgba(21,101,192,.05),
+    rgba(46,125,50,.05)
+  );
+}
+.month summary::-webkit-details-marker{display:none}
+.month .badge{
+  font-size:12px;
+  font-weight:900;
+  padding:8px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.88);
+  box-shadow:var(--shadow2);
+  color:var(--muted);
+  white-space:nowrap;
+}
+.month .body{padding:22px 24px 26px}
+.course-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.course{
+  padding:18px;
+  border-radius:16px;
+  background:var(--soft2);
+  box-shadow:var(--shadow2);
+  position:relative;
+  overflow:hidden;
+  transition:transform .2s ease;
+}
+.course:hover{transform:translateY(-2px)}
+.course::before{
+  content:"";
+  position:absolute; top:0; bottom:0; left:0;
+  width:6px;
+  background:#CBD5E1;
+}
+.course .kicker{
+  display:flex; align-items:center; gap:10px;
+  font-weight:900;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.dot{width:10px;height:10px;border-radius:999px;box-shadow:var(--shadow2)}
+.course .label{
+  display:inline-flex;
+  margin-top:10px;
+  padding:8px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  background:rgba(255,255,255,.75);
+  color:var(--ink);
+  width:fit-content;
+}
+.course strong{display:block; font-size:16px; margin-top:10px}
+.course .meta{color:var(--muted); font-size:13px; margin-top:6px}
+
+.course.orange::before{background:var(--orange)}
+.course.orange .dot{background:var(--orange)}
+.course.blue::before{background:var(--blue)}
+.course.blue .dot{background:var(--blue)}
+.course.green::before{background:var(--green)}
+.course.green .dot{background:var(--green)}
+.course.red::before{background:var(--red)}
+.course.red .dot{background:var(--red)}
+
+/* Contact list */
+.kv{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:16px;
+  background:var(--soft2);
+  box-shadow:var(--shadow2);
+  text-align:left;
+}
+.kv b{color:var(--ink)}
+.kv span{color:var(--muted)}
+
+/* Footer pro */
+footer{
+  background:linear-gradient(180deg, var(--navy2), var(--navy));
+  color:white;
+  padding:74px 0 54px;
+  text-align:left;
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:32px;
+  align-items:start;
+}
+.footer-brand{
+  display:flex; align-items:center; gap:14px;
+  font-weight:900;
+  letter-spacing:.02em;
+}
+.footer-brand img{height:40px; width:auto; filter:brightness(0) invert(1); opacity:.95}
+.footer-desc{color:rgba(255,255,255,.72); max-width:62ch}
+.footer-meta{display:grid; gap:10px; margin-top:18px}
+.footer-meta .row{
+  display:grid; grid-template-columns:120px 1fr; gap:12px;
+  padding:10px 0;
+  border-radius:0;
+  background:transparent;
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+.footer-meta .row b{color:rgba(255,255,255,.88)}
+.footer-meta .row span{color:rgba(255,255,255,.72)}
+.footer-links{
+  display:flex; gap:12px; flex-wrap:wrap;
+  margin-top:16px;
+}
+.footer-links a{
+  color:rgba(255,255,255,.86);
+  font-weight:700;
+  padding:0;
+  border-radius:0;
+  background:transparent;
+  text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.footer-links a:hover{border-bottom-color:rgba(255,255,255,.45)}
+.footer-bottom{
+  margin-top:26px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.12);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.footer-bottom .small{color:rgba(255,255,255,.70)}
+.footer-bottom a{color:rgba(255,255,255,.86); text-decoration:underline}
+
+/* Floating buttons */
+.fab-wrap{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:80;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.fab{
+  width:52px; height:52px;
+  border-radius:16px;
+  display:grid; place-items:center;
+  box-shadow:0 14px 34px rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  cursor:pointer;
+  transition:transform .15s ease, background .2s ease;
+  position:relative;
+}
+.fab:hover{transform:translateY(-2px); background:#fff}
+.fab.whatsapp{background:rgba(46,125,50,.12); border-color:rgba(46,125,50,.18)}
+.fab.whatsapp svg{fill:var(--green)}
+.fab.social svg{fill:var(--navy)}
+.fab .tip{
+  position:absolute;
+  right:64px;
+  background:rgba(11,26,42,.92);
+  color:#fff;
+  padding:10px 12px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
+  box-shadow:0 16px 36px rgba(0,0,0,.22);
+  opacity:0;
+  transform:translateX(6px);
+  pointer-events:none;
+  transition:opacity .15s ease, transform .15s ease;
+}
+.fab:hover .tip{opacity:1; transform:translateX(0)}
+
+
+/* About (solo sección + foto institucional) */
+.about-photo{ padding:0; overflow:hidden; text-align:left; }
+.about-photo img{ width:100%; height:260px; object-fit:cover; }
+.about-caption{ padding:18px 22px 22px; }
+.about-points{
+  margin-top:18px;
+  display:grid;
+  gap:10px;
+  max-width:640px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.ap{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:16px;
+  background:var(--soft2);
+  box-shadow:var(--shadow2);
+  text-align:left;
+}
+.ap b{ color:var(--ink); }
+.ap span{ color:var(--muted); font-weight:600; }
+
+/* Contact form */
+.contact-form label{
+  display:block;
+  text-align:left;
+  font-weight:800;
+  color:var(--ink);
+  font-size:13px;
+  letter-spacing:.02em;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea{
+  width:100%;
+  margin-top:8px;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid #D8E0EA;
+  background:#fff;
+  font:inherit;
+}
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus{
+  outline:none;
+  border-color:rgba(21,101,192,.55);
+  box-shadow:0 0 0 4px rgba(21,101,192,.12);
+}
+.frow{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:10px;
+}
+.form-actions{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+/* Responsive */
+@media(max-width:980px){
+  nav{display:none}
+  .grid2,.grid4,.course-grid,.footer-top{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:1fr}
+  .ph,.ph.big,.ph.small{grid-column:span 12}
+  footer{text-align:left}
+}
+
+/* === Footer luxury (safe) === */
+.footer-lux{background:#0b1220;color:rgba(255,255,255,.92);border-top:1px solid rgba(255,255,255,.1)}
+.footer-lux-inner{padding:36px 0;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.footer-lux-brand img{height:44px;filter:brightness(0) invert(1);opacity:.95}
+.footer-lux-name{font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+.footer-lux-tag{font-size:13px;color:rgba(255,255,255,.7)}
+.footer-lux-grid{width:min(900px,100%);display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.footer-box{border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;text-align:left;background:rgba(255,255,255,.03)}
+.footer-box-title{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:rgba(255,255,255,.75);margin-bottom:8px}
+.footer-box-item{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);font-weight:700;font-size:13px}
+.footer-box-item:last-child{border-bottom:0}
+.footer-lux-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.footer-lux-links a{color:rgba(255,255,255,.85);font-weight:700;font-size:13px;border-bottom:1px solid transparent}
+.footer-lux-links a:hover{border-bottom-color:rgba(255,255,255,.4)}
+.footer-lux-meta{font-size:12px;color:rgba(255,255,255,.65);display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+@media(max-width:900px){.footer-lux-grid{grid-template-columns:1fr}}
+
+
+/* === Footer refinement: sin bordes, más limpio === */
+.footer-box{
+  border: none !important;
+  background: transparent !important;
+  padding: 8px 0 !important;
+}
+.footer-box-item{
+  border-bottom: none !important;
+  padding: 6px 0 !important;
+}
+
+
+
+
+/* ===============================
+   Footer bar (compacto, elegante, con lo necesario)
+   =============================== */
+.footer-bar{
+  background:#0e1626;
+  color:rgba(255,255,255,.88);
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.footer-bar-inner{
+  padding:10px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.footer-bar-left,
+.footer-bar-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  font-size:12px;
+  font-weight:700;
+}
+.brand-mini{
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-weight:900;
+  font-size:11px;
+  color:rgba(255,255,255,.92);
+}
+.dot{ opacity:.5; }
+.mini-text{ color:rgba(255,255,255,.68); font-weight:700; }
+.mini-link{
+  color:rgba(255,255,255,.84);
+  border-bottom:1px solid transparent;
+  padding-bottom:1px;
+}
+.mini-link:hover{ color:rgba(255,255,255,.96); border-bottom-color:rgba(255,255,255,.35); }
+.copy{
+  color:rgba(255,255,255,.62);
+  font-weight:800;
+  letter-spacing:.04em;
+}
+.hide-sm{ display:inline; }
+
+@media (max-width: 760px){
+  .footer-bar-inner{ justify-content:center; }
+  .hide-sm{ display:none; }
+  .footer-bar-left, .footer-bar-right{ justify-content:center; }
+}
+
+
+/* Footer logo */
+.footer-logo-mini{
+  height:20px;
+  width:auto;
+  background:transparent;
+  filter:none; /* no invert: el PNG ya es claro */
+  opacity:1;
+  display:block;
+}
+/* ===== INTRO PRO ===== */
+#intro{
+  position: fixed;
+  inset: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index: 99999;
+  background: radial-gradient(1200px 500px at 50% 40%, rgba(10,30,70,.18), rgba(0,0,0,0) 60%), #ffffff;
+  overflow:hidden;
+}
+#intro.is-fading{ animation: introFadeOut 1400ms ease forwards; }
+.intro-inner{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 14px;
+  transform: translateY(6px);
+  animation: introRise 700ms ease forwards;
+}
+.intro-logo{
+  width: 190px;
+  height:auto;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,.12));
+  animation: heartbeat 1200ms ease-in-out 2;
+}
+.intro-pulse{
+  position:absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(10,40,120,.18), rgba(10,40,120,0) 60%);
+  filter: blur(2px);
+  z-index:-1;
+  animation: pulseRing 1400ms ease-in-out 2;
+}
+.intro-sub{
+  font-size: 13px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(10,20,40,.65);
+  opacity: 0;
+  animation: introSubIn 700ms ease forwards;
+  animation-delay: 550ms;
+}
+@keyframes heartbeat{
+  0%{ transform: scale(1); }
+  18%{ transform: scale(1.08); }
+  36%{ transform: scale(1); }
+  54%{ transform: scale(1.06); }
+  72%{ transform: scale(1); }
+  100%{ transform: scale(1); }
+}
+@keyframes pulseRing{
+  0%{ transform: scale(.85); opacity:.0; }
+  25%{ transform: scale(1.02); opacity:.9; }
+  60%{ transform: scale(1.18); opacity:.25; }
+  100%{ transform: scale(1.25); opacity:0; }
+}
+@keyframes introRise{ from{ opacity: 0; transform: translateY(16px);} to{ opacity: 1; transform: translateY(6px);} }
+@keyframes introSubIn{ to{ opacity: 1; } }
+@keyframes introFadeOut{ to{ opacity:0; visibility:hidden; } }
+html.intro-lock, body.intro-lock { overflow: hidden; }
+
+/* ===== SECCIÓN MÉDICO ===== */
+.medico{ padding: 70px 0; background: linear-gradient(180deg, rgba(10,30,70,.04), rgba(255,255,255,0)); }
+.medico-wrap{ display:grid; grid-template-columns: 1.2fr .9fr; gap: 28px; align-items: start; }
+.medico-badge{
+  display:inline-block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+  padding: 8px 12px; border-radius: 999px; background: rgba(10,30,70,.08);
+  color: rgba(10,30,70,.85); margin-bottom: 12px;
+}
+.medico h2{ margin: 0 0 10px 0; font-size: 34px; line-height: 1.1; color: var(--ink); }
+.medico-lead{ margin: 0 0 16px 0; color: rgba(10,20,40,.75); font-size: 16px; line-height: 1.6; }
+.medico-list{ list-style:none; padding:0; margin: 0 0 18px 0; display:grid; gap: 10px; color: rgba(10,20,40,.78); }
+.medico-actions{ display:flex; gap: 12px; flex-wrap: wrap; justify-content:center; }
+
+.medico-card{
+  border-radius: var(--radius); background: rgba(255,255,255,.78);
+  border: 1px solid rgba(10,30,70,.10); overflow:hidden;
+  box-shadow: var(--shadow); backdrop-filter: blur(10px);
+}
+.medico-photo{ padding: 14px; position:relative; }
+.medico-photo img{
+  width:100%;
+  height: 360px;
+  object-fit: cover;
+  object-position: 50% 15%;
+  border-radius: 18px;
+  display:block;
+  border: 1px solid rgba(10,30,70,.10);
+}
+.medico-photo.noimg .medico-photo-fallback{ display:flex; }
+.medico-photo-fallback{
+  display:none;
+  height: 360px; border-radius: 18px;
+  background: linear-gradient(135deg, rgba(10,42,102,.10), rgba(10,42,102,.03));
+  border: 1px dashed rgba(10,42,102,.25);
+  align-items:center; justify-content:center;
+  color: rgba(10,42,102,.75); font-weight: 600;
+}
+.medico-card-body{ padding: 0 18px 18px 18px; }
+.medico-mini{
+  display:flex; align-items:center; gap: 10px; padding: 10px 12px;
+  border-radius: 16px; background: rgba(10,30,70,.05);
+  color: rgba(10,20,40,.78); margin-bottom: 10px;
+}
+.medico-mini .dot{
+  width: 10px; height: 10px; border-radius: 999px; background: var(--blue);
+  box-shadow: 0 0 0 5px rgba(21,101,192,.12);
+}
+.medico-quote{
+  margin-top: 12px; padding: 14px 12px; border-radius: 16px;
+  background: rgba(10,42,102,.06); color: rgba(10,20,40,.80); font-style: italic;
+}
+@media (max-width: 900px){ .medico-wrap{ grid-template-columns: 1fr; } .medico h2{ font-size: 28px; } }
+
+</style>
+</head>
+<body>
+<!-- INTRO -->
+<div id="intro" aria-hidden="true">
+  <div class="intro-inner">
+    <img src="./assets/logo-ireanimacion.png" alt="iReanimación" class="intro-logo">
+    <div class="intro-pulse"></div>
+    <div class="intro-sub">Capacitación • Brigadas • Respuesta</div>
+  </div>
+</div>
+
+<header>
+<div class="container header-inner">
+<a aria-label="Inicio" class="brand" href="#inicio">
+<img alt="iReanimación" onerror="this.style.display='none';" src="./assets/logo-ireanimacion.png"/>
+</a>
+<nav aria-label="Navegación principal">
+<a href="#quienes">Quiénes somos</a>
+
+<a href="#medico">Dirección médica</a>
+<a href="#pilares">Pilares</a>
+<a href="#galeria">Galería</a>
+<a href="#cursos">Cursos</a>
+<a href="#contacto">Contacto</a>
+<a href="./aviso-privacidad.html">Aviso</a>
+</nav>
+<div class="header-actions">
+<a class="btn" href="#cursos">Ver cursos</a>
+<a class="btn primary" href="#contacto">Solicitar info</a>
+</div>
+</div>
+</header>
+<section class="hero" id="inicio">
+<div class="container">
+<div class="reveal pop">
+<h1>Capacitación clínica para emergencias médicas</h1>
+<p>Elevamos la calidad en la atención de urgencias mediante entrenamiento profesional, rigor científico y ética, en un entorno colaborativo.</p>
+<div class="hero-cta">
+<a class="btn primary" href="#cursos">Cursos</a>
+<a class="btn" href="#contacto">Contacto</a>
+</div>
+<div aria-label="Atributos institucionales" class="hero-stats">
+<div class="stat">
+<strong>Rigor científico</strong>
+<span>Actualización y contenidos basados en evidencia.</span>
+</div>
+<div class="stat">
+<strong>Ética profesional</strong>
+<span>Formación responsable con enfoque humano.</span>
+</div>
+<div class="stat">
+<strong>Experiencia real</strong>
+<span>Instructores con trayectoria clínica y operativa.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="quienes">
+<div class="container grid2">
+<div class="reveal">
+<h2>¿Quiénes somos?</h2>
+<p>iReanimación es una institución dedicada a la capacitación, certificación y actualización continua en emergencias médicas, con el objetivo de mejorar la calidad de la atención y la respuesta clínica en situaciones críticas.</p>
+<p class="muted">Nuestro equipo cuenta con amplia experiencia en la organización e impartición de cursos, siempre con un alto nivel científico y ético, en un ambiente fraterno de colaboración.</p>
+<div class="about-points">
+<div class="ap"><b>Enfoque</b><span>Hospitalario, ético y científico</span></div>
+<div class="ap"><b>Metodología</b><span>Teoría + práctica guiada + evidencia</span></div>
+<div class="ap"><b>Resultados</b><span>Competencias medibles y constancias</span></div>
+</div>
+</div>
+<div aria-label="Fotografía institucional" class="about-photo card reveal">
+<img alt="Equipo de capacitación (foto institucional)" onerror="this.style.display='none'" src="./assets/about.jpg"/>
+<div class="about-caption">
+<h3>Formación con práctica real</h3>
+<p class="muted">Entrenamiento práctico con escenarios reales, retroalimentación directa y enfoque en seguridad.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section soft" <section class="medico" id="medico">
+  <div class="container medico-wrap reveal">
+    <div class="medico-left">
+      <div class="medico-badge">Dirección Médica</div>
+      <h2>Dr. Edgard Díaz Soto</h2>
+      <p class="medico-lead">
+        Responsable del enfoque clínico y la calidad de los protocolos. En iReanimación entrenamos con práctica,
+        rigor científico y una visión humana orientada a salvar vidas.
+      </p>
+
+      <ul class="medico-list">
+        <li><strong>Enfoque:</strong> Emergencias médicas, RCP, DEA, brigadas y respuesta.</li>
+        <li><strong>Metodología:</strong> Entrenamiento práctico supervisado y alineado a evidencia.</li>
+        <li><strong>Objetivo:</strong> Preparar personal para actuar con seguridad, tiempo y criterio.</li>
+      </ul>
+
+      <div class="medico-actions">
+        <a class="btn primary" href="#contacto">Agendar capacitación</a>
+        <a class="btn" href="#cursos">Ver cursos</a>
+      </div>
+    </div>
+
+    <div class="medico-right">
+      <div class="medico-card">
+        <div class="medico-photo">
+          <img src="./assets/dr-edgard-diaz-soto.jpg" alt="Dr. Edgard Díaz Soto" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('noimg');">
+          <div class="medico-photo-fallback">Foto del médico</div>
+        </div>
+
+        <div class="medico-card-body">
+          <div class="medico-mini"><span class="dot"></span> Protocolos basados en guías vigentes</div>
+          <div class="medico-mini"><span class="dot"></span> Práctica supervisada y evaluación</div>
+          <div class="medico-mini"><span class="dot"></span> Evidencia y documentación para empresa</div>
+
+          <div class="medico-quote">“La diferencia entre reaccionar y salvar una vida es el entrenamiento.”</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" id="pilares">
+<div class="container">
+<div class="reveal">
+<h2>Pilares de formación</h2>
+<p class="muted">Evidencia clínica, práctica responsable y mejora continua.</p>
+</div>
+<div class="grid4" style="margin-top:34px">
+<div class="card pillar reveal">
+<span class="k">Reanimación</span>
+<h3>Respuesta inmediata</h3>
+<p class="muted">Soporte vital y toma de decisiones en minutos críticos.</p>
+</div>
+<div class="card pillar reveal">
+<span class="k">Clínico</span>
+<h3>Protocolos hospitalarios</h3>
+<p class="muted">Manejo del paciente crítico con enfoque sistemático.</p>
+</div>
+<div class="card pillar reveal">
+<span class="k">Prevención</span>
+<h3>Primeros auxilios</h3>
+<p class="muted">Atención inicial, seguridad y reducción de riesgos.</p>
+</div>
+<div class="card pillar reveal">
+<span class="k">Trauma</span>
+<h3>Urgencia crítica</h3>
+<p class="muted">Control de hemorragias y atención de trauma.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="galeria">
+<div class="container">
+<div class="reveal">
+<h2>Galería de capacitación</h2>
+<p class="muted">Momentos de nuestras prácticas, talleres y simulaciones durante las capacitaciones.</p>
+</div>
+<div class="gallery-grid">
+<a class="ph reveal" href="./assets/g1.jpg" rel="noreferrer" target="_blank">
+<img alt="Curso y aula" onerror="this.closest('.ph').style.display='none';" src="./assets/g1.jpg"/>
+<span>Curso · Aula</span>
+</a>
+<a class="ph reveal" href="./assets/g2.jpg" rel="noreferrer" target="_blank">
+<img alt="Instructor" onerror="this.closest('.ph').style.display='none';" src="./assets/g2.jpg"/>
+<span>Instructor · Demostración</span>
+</a>
+<a class="ph reveal" href="./assets/g3.jpg" rel="noreferrer" target="_blank">
+<img alt="Práctica" onerror="this.closest('.ph').style.display='none';" src="./assets/g3.jpg"/>
+<span>Práctica</span>
+</a>
+<a class="ph reveal" href="./assets/g4.jpg" rel="noreferrer" target="_blank">
+<img alt="Simulación" onerror="this.closest('.ph').style.display='none';" src="./assets/g4.jpg"/>
+<span>Simulación</span>
+</a>
+</div>
+</div>
+</section>
+<section class="section" id="cursos">
+<div class="container">
+<div class="reveal">
+<h2>Cursos por mes</h2>
+<p class="muted">Categorías por color (profesionales):</p>
+<p class="small muted" style="margin-top:-6px">
+<strong style="color:var(--orange)">Naranja</strong> Reanimación ·
+        <strong style="color:var(--blue)">Azul</strong> Clínico ·
+        <strong style="color:var(--green)">Verde</strong> Prevención ·
+        <strong style="color:var(--red)">Rojo</strong> Trauma
+      </p>
+</div>
+<div class="months" style="margin-top:22px">
+<details class="month reveal" open="">
+<summary><span>Enero 2026</span><span class="badge">Ejemplos</span></summary>
+<div class="body">
+<div class="course-grid">
+<div class="course orange">
+<div class="kicker"><span aria-hidden="true" class="dot"></span> Reanimación</div>
+<div class="label">Categoría: Reanimación (Naranja)</div>
+<strong>Soporte Vital Básico (BLS)</strong>
+<div class="meta">Presencial · CDMX · Cupo limitado</div>
+<div class="meta">Fechas por confirmar</div>
+</div>
+<div class="course green">
+<div class="kicker"><span aria-hidden="true" class="dot"></span> Prevención</div>
+<div class="label">Categoría: Prevención (Verde)</div>
+<strong>Primeros Auxilios para Empresas</strong>
+<div class="meta">Presencial · CDMX</div>
+<div class="meta">Fechas por confirmar</div>
+</div>
+<div class="course blue">
+<div class="kicker"><span aria-hidden="true" class="dot"></span> Clínico</div>
+<div class="label">Categoría: Clínico (Azul)</div>
+<strong>Manejo Inicial del Paciente Crítico</strong>
+<div class="meta">Presencial · CDMX</div>
+<div class="meta">Fechas por confirmar</div>
+</div>
+<div class="course red">
+<div class="kicker"><span aria-hidden="true" class="dot"></span> Trauma</div>
+<div class="label">Categoría: Trauma (Rojo)</div>
+<strong>Trauma y Control de Hemorragia</strong>
+<div class="meta">Presencial · CDMX</div>
+<div class="meta">Fechas por confirmar</div>
+</div>
+</div>
+</div>
+</details>
+<details class="month reveal">
+<summary><span>Febrero 2026</span><span class="badge">Ejemplos</span></summary>
+<div class="body">
+<div class="course-grid">
+<div class="course orange">
+<div class="kicker"><span aria-hidden="true" class="dot"></span> Reanimación</div>
+<div class="label">Categoría: Reanimación (Naranja)</div>
+<strong>Soporte Vital Básico (BLS)</strong>
+<div class="meta">Presencial · CDMX</div>
+<div class="meta">Fechas por confirmar</div>
+</div>
+<div class="course blue">
+<div class="kicker"><span aria-hidden="true" class="dot"></span> Clínico</div>
+<div class="label">Categoría: Clínico (Azul)</div>
+<strong>Paciente Crítico: Evaluación y Abordaje</strong>
+<div class="meta">Presencial · CDMX</div>
+<div class="meta">Fechas por confirmar</div>
+</div>
+</div>
+</div>
+</details>
+<details class="month reveal">
+<summary><span>Marzo 2026</span><span class="badge">Próximamente</span></summary>
+<div class="body">
+<p class="muted">Calendario de cursos <strong>próximamente</strong>. En cuanto se publiquen fechas, esta sección se actualizará.</p>
+</div>
+</details>
+</div>
+</div>
+</section>
+<section class="section soft" id="contacto">
+<div class="container grid2">
+<div class="reveal">
+<h2>Contacto</h2>
+<p class="muted">Información, inscripciones y programación mensual.</p>
+<div style="display:grid; gap:10px; margin-top:14px">
+<div class="kv"><b>Ubicación</b><span>Avenida Insurgentes #4303, Col. Santa Úrsula Xitla, Tlalpan, CP 14420, CDMX. Edificio Esteban Martínez de la Serna.</span></div>
+<div class="kv"><b>Teléfono</b><span><a href="tel:+525545478142">55 4547 8142</a></span></div>
+<div class="kv"><b>Correo</b><span><a href="mailto:ireanimacion.contacto@gmail.com">ireanimacion.contacto@gmail.com</a></span></div>
+<div class="kv"><b>Horario</b><span>Lunes a viernes: 8:00 a 17:00 · Sábado: 8:00 a 13:00</span></div>
+</div>
+</div>
+<div class="card reveal">
+<h3>Solicitar información</h3>
+<p class="muted">Déjanos tus datos y el curso de interés. Te respondemos a la brevedad.</p>
+<form class="contact-form" id="contactForm" style="margin-top:14px">
+<div class="frow">
+<label>
+            Nombre
+            <input name="nombre" placeholder="Tu nombre" required=""/>
+</label>
+<label>
+            Teléfono
+            <input name="telefono" placeholder="55 0000 0000"/>
+</label>
+</div>
+<div class="frow">
+<label>
+            Correo
+            <input name="correo" placeholder="tu@correo.com" required="" type="email"/>
+</label>
+<label>
+            Curso
+            <select name="curso" required="">
+<option disabled="" selected="" value="">Selecciona…</option>
+<option>Soporte Vital Básico (BLS)</option>
+<option>Primeros Auxilios para Empresas</option>
+<option>Manejo Inicial del Paciente Crítico</option>
+<option>Trauma y Control de Hemorragia</option>
+<option>Otro / A medida</option>
+</select>
+</label>
+</div>
+<label>
+          Mensaje
+          <textarea name="mensaje" placeholder="Ciudad, fechas tentativas, número de participantes, etc." rows="4"></textarea>
+</label>
+<div class="form-actions">
+<button class="btn primary" type="submit">Enviar solicitud</button>
+<p class="small muted" id="formHint">Formulario demo (sin envío). Se conecta a correo/WhatsApp cuando lo indiques.</p>
+</div>
+</form>
+</div>
+</div>
+</section>
+<footer class="footer footer-elite footer-bar" role="contentinfo">
+<div class="container footer-bar-inner">
+<div class="footer-bar-left"><img alt="iReanimación" class="footer-logo-mini" src="./assets/logo-ireanimacion.png"/>
+
+<span aria-hidden="true" class="dot">•</span>
+<a class="mini-link" href="mailto:contacto@tudominio.com">contacto@tudominio.com</a>
+<span aria-hidden="true" class="dot">•</span>
+<a aria-label="WhatsApp" class="mini-link" href="#">WhatsApp +52 55 0000 0000</a>
+<span aria-hidden="true" class="dot hide-sm">•</span>
+<span class="mini-text hide-sm">CDMX / Área Metropolitana</span>
+</div>
+<div class="footer-bar-right">
+<a class="mini-link" href="#cursos">Cursos</a>
+<a class="mini-link" href="#contacto">Contacto</a>
+<a class="mini-link" href="#" title="Aviso de privacidad (pendiente)">Aviso de privacidad</a>
+<a class="mini-link" href="#" title="Términos (pendiente)">Términos</a>
+<span class="copy">© <span id="year"></span></span>
+</div>
+</div>
+</footer>
+<!-- Floating buttons -->
+<div aria-label="Accesos rápidos" class="fab-wrap">
+<a aria-label="WhatsApp iReanimación" class="fab whatsapp" href="https://wa.me/525545478142?text=Hola%20iReanimaci%C3%B3n,%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20sus%20cursos." rel="noreferrer" target="_blank">
+<span class="tip">WhatsApp</span>
+<svg aria-hidden="true" height="22" viewbox="0 0 32 32" width="22">
+<path d="M19.11 17.41c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.33-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.66 1.12 2.84.14.18 1.93 2.95 4.68 4.13.66.29 1.17.46 1.57.59.66.21 1.26.18 1.74.11.53-.08 1.6-.65 1.83-1.27.23-.62.23-1.15.16-1.27-.07-.12-.25-.2-.52-.34zM16.04 3C9.43 3 4.06 8.37 4.06 14.98c0 2.13.56 4.14 1.53 5.89L4 29l8.32-2.15a11.9 11.9 0 003.72.6c6.61 0 11.98-5.37 11.98-11.98C28.02 8.37 22.65 3 16.04 3zm0 21.63c-1.22 0-2.41-.24-3.51-.71l-.25-.1-4.93 1.27 1.31-4.8-.12-.24a9.6 9.6 0 01-1.21-4.65c0-5.33 4.34-9.67 9.67-9.67 5.33 0 9.67 4.34 9.67 9.67 0 5.33-4.34 9.67-9.67 9.67z"></path>
+</svg>
+</a>
+<a aria-label="Facebook" class="fab social" href="https://www.facebook.com/" rel="noreferrer" target="_blank">
+<span class="tip">Facebook</span>
+<svg aria-hidden="true" height="18" viewbox="0 0 24 24" width="18"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5V9.7c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.5V12H17l-.4 3h-2.6v7A10 10 0 0022 12z"></path></svg>
+</a>
+<a aria-label="Instagram" class="fab social" href="https://www.instagram.com/" rel="noreferrer" target="_blank">
+<span class="tip">Instagram</span>
+<svg aria-hidden="true" height="18" viewbox="0 0 24 24" width="18"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10 2H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm-5 4.5A5.5 5.5 0 1112 19.5 5.5 5.5 0 0112 8.5zm0 2A3.5 3.5 0 1015.5 14 3.5 3.5 0 0012 10.5zM18 6.8a1.2 1.2 0 11-1.2 1.2A1.2 1.2 0 0118 6.8z"></path></svg>
+</a>
+<a aria-label="YouTube" class="fab social" href="https://www.youtube.com/" rel="noreferrer" target="_blank">
+<span class="tip">YouTube</span>
+<svg aria-hidden="true" height="18" viewbox="0 0 24 24" width="18"><path d="M21.6 7.2a3 3 0 00-2.1-2.1C17.9 4.6 12 4.6 12 4.6s-5.9 0-7.5.5A3 3 0 002.4 7.2a31.8 31.8 0 000 9.6 3 3 0 002.1 2.1c1.6.5 7.5.5 7.5.5s5.9 0 7.5-.5a3 3 0 002.1-2.1 31.8 31.8 0 000-9.6zM10 15.5v-7l6 3.5-6 3.5z"></path></svg>
+</a>
+</div>
+<script>
+  // Año en footer
+  const y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+
+  // Reveal + stagger
+  const els = Array.from(document.querySelectorAll('.reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        const i = els.indexOf(e.target);
+        e.target.style.transitionDelay = (Math.min(i % 8, 6) * 70) + "ms";
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+
+  // Nav active link
+  const sections = ['quienes','medico','pilares','galeria','cursos','contacto'].map(id => document.getElementById(id));
+  const navLinks = Array.from(document.querySelectorAll('nav a')).filter(a => a.getAttribute('href')?.startsWith('#'));
+  const navIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        const id = e.target.id;
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: "-45% 0px -50% 0px", threshold: 0.01 });
+  sections.forEach(s => s && navIO.observe(s));
+  // Form (demo)
+  const form = document.getElementById('contactForm');
+  if (form){
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const hint = document.getElementById('formHint');
+      if (hint) hint.textContent = 'Listo ✅ (demo) — solicitud capturada. Conecto el envío real a correo/WhatsApp cuando me indiques.';
+      form.reset();
+    });
+  }
+
+
+  // Intro (logo late + fade) — premium, sin afectar rendimiento
+  (function(){
+    const intro = document.getElementById('intro');
+    if (!intro) return;
+    document.documentElement.classList.add('intro-lock');
+    document.body.classList.add('intro-lock');
+
+    const TOTAL = 3900; // ms (latidos igual, entrada más lenta)
+    setTimeout(() => { intro.classList.add('is-fading'); }, TOTAL - 1400);
+    setTimeout(() => {
+      intro.remove();
+      document.documentElement.classList.remove('intro-lock');
+      document.body.classList.remove('intro-lock');
+    }, TOTAL);
+  })();
+</script>
+</body>
+</html>
